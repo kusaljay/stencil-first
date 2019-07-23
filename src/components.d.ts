@@ -9,6 +9,12 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
+  interface KfTab {
+    'active': boolean;
+    'disabled': boolean;
+    'label': string;
+  }
+  interface KfTabs {}
   interface MyButton {
     'color': 'primary' | 'accent' | 'light';
     'disabled': boolean;
@@ -26,6 +32,18 @@ export namespace Components {
 declare global {
 
 
+  interface HTMLKfTabElement extends Components.KfTab, HTMLStencilElement {}
+  var HTMLKfTabElement: {
+    prototype: HTMLKfTabElement;
+    new (): HTMLKfTabElement;
+  };
+
+  interface HTMLKfTabsElement extends Components.KfTabs, HTMLStencilElement {}
+  var HTMLKfTabsElement: {
+    prototype: HTMLKfTabsElement;
+    new (): HTMLKfTabsElement;
+  };
+
   interface HTMLMyButtonElement extends Components.MyButton, HTMLStencilElement {}
   var HTMLMyButtonElement: {
     prototype: HTMLMyButtonElement;
@@ -38,12 +56,20 @@ declare global {
     new (): HTMLMyComponentElement;
   };
   interface HTMLElementTagNameMap {
+    'kf-tab': HTMLKfTabElement;
+    'kf-tabs': HTMLKfTabsElement;
     'my-button': HTMLMyButtonElement;
     'my-component': HTMLMyComponentElement;
   }
 }
 
 declare namespace LocalJSX {
+  interface KfTab extends JSXBase.HTMLAttributes<HTMLKfTabElement> {
+    'active'?: boolean;
+    'disabled'?: boolean;
+    'label'?: string;
+  }
+  interface KfTabs extends JSXBase.HTMLAttributes<HTMLKfTabsElement> {}
   interface MyButton extends JSXBase.HTMLAttributes<HTMLMyButtonElement> {
     'color'?: 'primary' | 'accent' | 'light';
     'disabled'?: boolean;
@@ -58,6 +84,8 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
+    'kf-tab': KfTab;
+    'kf-tabs': KfTabs;
     'my-button': MyButton;
     'my-component': MyComponent;
   }
